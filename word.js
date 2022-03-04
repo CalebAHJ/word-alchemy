@@ -2000,6 +2000,8 @@ Mazikeen,
 Belle,
 Kadence`
 
+//name setup
+
 const guy_names = guy_text.split(',');
 const girl_names = girl_text.split(',');
 
@@ -2018,3 +2020,38 @@ const word_one = document.getElementById('word-one');
 const word_two = document.getElementById('word-two');
 word_one.textContent = getNames()[0];
 word_two.textContent = getNames()[1];
+
+//make sure word is not a duplicate and only uses letters from names given
+
+const word_entries = [];
+let score = 0;
+
+const enter = document.getElementById('enter');
+enter.addEventListener('click', (event) => {
+
+    const input = document.getElementById('input');
+    const input_text = input.value;
+
+    let points = true;
+    for (let i = 0; i < word_entries.length; i++) {
+        if (input_text.match(word_entries[i])) points = False;
+    }
+    if (points) {
+        const guy_chars = word_one.textContent.toLowerCase().split('');
+        const girl_chars = word_two.textContent.toLowerCase().split('');
+        const word_chars = input_text.split('');
+
+        char_match = 0;
+        for (let i = 0; i < word_chars.length; i++) {
+            for (let j = 1; j < guy_chars.length; j++) {
+                if (word_chars[i].match(guy_chars[j]))  char_match++;
+            }
+            for (let j = 1; j < girl_chars.length; j++) {
+                if (word_chars[i].match(girl_chars[j])) char_match++;
+            }
+        }
+    if (char_match === word_chars.length) score += word_chars.length;
+
+    document.getElementById('score').textContent += score;
+    }
+});
