@@ -2052,6 +2052,6 @@ enter.addEventListener('click', (event) => {
         }
     if (char_match === word_chars.length) score += word_chars.length;
 
-    document.getElementById('score').textContent += score;
+    document.getElementById('score').textContent = score;
     }
 });
