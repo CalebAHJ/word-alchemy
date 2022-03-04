@@ -2011,5 +2011,10 @@ function getNames() {
     const random_guy = getRandomInt(1000);
     const random_girl = getRandomInt(1000);
 
-    return guy_names[random_guy] + ' ' + girl_names[random_girl];
+    return [guy_names[random_guy], girl_names[random_girl]];
 }
+
+const word_one = document.getElementById('word-one');
+const word_two = document.getElementById('word-two');
+word_one.textContent = getNames()[0];
+word_two.textContent = getNames()[1];
