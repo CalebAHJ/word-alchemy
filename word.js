@@ -2002,3 +2002,14 @@ Kadence`
 
 const guy_names = guy_text.split(',');
 const girl_names = girl_text.split(',');
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function getNames() {
+    const random_guy = getRandomInt(1000);
+    const random_girl = getRandomInt(1000);
+
+    return guy_names[random_guy] + ' ' + girl_names[random_girl];
+}
