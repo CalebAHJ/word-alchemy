@@ -2030,7 +2030,7 @@ const enter = document.getElementById('enter');
 enter.addEventListener('click', (event) => {
 
     const input = document.getElementById('input');
-    const input_text = input.value;
+    const input_text = input.value.toLowerCase();
 
     let points = true;
     for (let i = 0; i < word_entries.length; i++) {
