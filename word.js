@@ -2062,3 +2062,5 @@ function game() {
         document.getElementById('score').textContent = prev_score + score;
     });
 }
+
+game();
