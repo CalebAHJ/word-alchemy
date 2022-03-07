@@ -2000,7 +2000,6 @@ Mazikeen,
 Belle,
 Kadence`
 
-//name setup
 
 const guy_names = guy_text.split(',');
 const girl_names = girl_text.split(',');
@@ -2021,15 +2020,18 @@ function char_check(word, guy, girl) {
     const girl_chars = girl.split('');
     const word_chars = word.split('');
 
+    const total_chars = guy_chars.slice(1).concat(girl_chars.slice(1));
+    const unique_chars = total_chars.filter((char, index) => {
+        return total_chars.indexOf(char) === index;
+    });
+
     char_match = 0;
     for (let i = 0; i < word_chars.length; i++) {
-        for (let j = 1; j < guy_chars.length; j++) {
-            if (word_chars[i].match(guy_chars[j]))  char_match++;
-        }
-        for (let j = 1; j < girl_chars.length; j++) {
-            if (word_chars[i].match(girl_chars[j])) char_match++;
+        for (let j = 0; j < unique_chars.length; j++) {
+            if (word_chars[i] === word_chars[j]) char_match++;
         }
     }
+    
     if (char_match === word_chars.length) return char_match;
     return 0;
 }
