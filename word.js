@@ -2016,6 +2016,24 @@ function getNames() {
     return [guy_names[random_guy], girl_names[random_girl]];
 }
 
+function char_check(word, guy, girl) {
+    const guy_chars = guy.textContent.toLowerCase().split('');
+        const girl_chars = girl.textContent.toLowerCase().split('');
+        const word_chars = word.split('');
+
+        char_match = 0;
+        for (let i = 0; i < word_chars.length; i++) {
+            for (let j = 1; j < guy_chars.length; j++) {
+                if (word_chars[i].match(guy_chars[j]))  char_match++;
+            }
+            for (let j = 1; j < girl_chars.length; j++) {
+                if (word_chars[i].match(girl_chars[j])) char_match++;
+            }
+        }
+    if (char_match === word_chars.length) return char_match;
+    return 0;
+}
+
 const word_one = document.getElementById('word-one');
 const word_two = document.getElementById('word-two');
 word_one.textContent = getNames()[0];
@@ -2037,21 +2055,10 @@ enter.addEventListener('click', (event) => {
         if (input_text.match(word_entries[i])) points = False;
     }
     if (points) {
-        const guy_chars = word_one.textContent.toLowerCase().split('');
-        const girl_chars = word_two.textContent.toLowerCase().split('');
-        const word_chars = input_text.split('');
-
-        char_match = 0;
-        for (let i = 0; i < word_chars.length; i++) {
-            for (let j = 1; j < guy_chars.length; j++) {
-                if (word_chars[i].match(guy_chars[j]))  char_match++;
-            }
-            for (let j = 1; j < girl_chars.length; j++) {
-                if (word_chars[i].match(girl_chars[j])) char_match++;
-            }
-        }
-    if (char_match === word_chars.length) score += word_chars.length;
-
-    document.getElementById('score').textContent = score;
+        score = char_check(input_text, word_one.textContent.toLowerCase, 
+                            word_two.textContent.toLowerCase);
     }
+        
+    prev_score = parseInt(document.getElementById('score').textContent)
+    document.getElementById('score').textContent = prev_score + score;
 });
