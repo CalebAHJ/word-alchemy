@@ -2034,31 +2034,31 @@ function char_check(word, guy, girl) {
     return 0;
 }
 
-const word_one = document.getElementById('word-one');
-const word_two = document.getElementById('word-two');
-word_one.textContent = getNames()[0];
-word_two.textContent = getNames()[1];
+function game() {
+    const word_one = document.getElementById('word-one');
+    const word_two = document.getElementById('word-two');
+    word_one.textContent = getNames()[0];
+    word_two.textContent = getNames()[1];
 
-//make sure word is not a duplicate and only uses letters from names given
+    const word_entries = [];
+    let score = 0;
 
-const word_entries = [];
-let score = 0;
+    const enter = document.getElementById('enter');
+    enter.addEventListener('click', (event) => {
 
-const enter = document.getElementById('enter');
-enter.addEventListener('click', (event) => {
+        const input = document.getElementById('input');
+        const input_text = input.value.toLowerCase();
 
-    const input = document.getElementById('input');
-    const input_text = input.value.toLowerCase();
-
-    let points = true;
-    for (let i = 0; i < word_entries.length; i++) {
-        if (input_text.match(word_entries[i])) points = False;
-    }
-    if (points) {
-        score = char_check(input_text, word_one.textContent.toLowerCase, 
-                            word_two.textContent.toLowerCase);
-    }
-        
-    prev_score = parseInt(document.getElementById('score').textContent)
-    document.getElementById('score').textContent = prev_score + score;
-});
+        let points = true;
+        for (let i = 0; i < word_entries.length; i++) {
+            if (input_text.match(word_entries[i])) points = False;
+        }
+        if (points) {
+            score = char_check(input_text, word_one.textContent.toLowerCase(), 
+                                word_two.textContent.toLowerCase());
+        }
+            
+        prev_score = parseInt(document.getElementById('score').textContent)
+        document.getElementById('score').textContent = prev_score + score;
+    });
+}
