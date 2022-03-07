@@ -2034,6 +2034,13 @@ function char_check(word, guy, girl) {
     return 0;
 }
 
+function duplicate_word(prev_inputs, input_text) {
+    for (let i = 0; i < prev_inputs.length; i++) {
+        if (input_text.match(prev_inputs[i])) return true;
+    }
+    return false;
+}
+
 function game() {
     const word_one = document.getElementById('word-one');
     const word_two = document.getElementById('word-two');
@@ -2046,17 +2053,14 @@ function game() {
     const enter = document.getElementById('enter');
     enter.addEventListener('click', (event) => {
 
-        const input = document.getElementById('input');
-        const input_text = input.value.toLowerCase();
-
-        let points = true;
-        for (let i = 0; i < word_entries.length; i++) {
-            if (input_text.match(word_entries[i])) points = False;
-        }
-        if (points) {
-            score = char_check(input_text, word_one.textContent.toLowerCase(), 
-                                word_two.textContent.toLowerCase());
-        }
+    const input = document.getElementById('input');
+    const input_text = input.value.toLowerCase();
+        
+    if (!duplicate_word(word_entries, input_text)) {
+        score = char_check(input_text, word_one.textContent.toLowerCase(), 
+                            word_two.textContent.toLowerCase());
+    }
+    word_entries.push(input_text)
             
         prev_score = parseInt(document.getElementById('score').textContent)
         document.getElementById('score').textContent = prev_score + score;
