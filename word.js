@@ -2061,8 +2061,10 @@ function game() {
     if (!duplicate_word(word_entries, input_text)) {
         score = char_check(input_text, word_one.textContent.toLowerCase(), 
                             word_two.textContent.toLowerCase());
+                            
+        word_entries.push(input_text);
     }
-    word_entries.push(input_text)
+
             
         prev_score = parseInt(document.getElementById('score').textContent)
         document.getElementById('score').textContent = prev_score + score;
