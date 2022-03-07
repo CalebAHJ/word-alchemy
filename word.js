@@ -2017,19 +2017,19 @@ function getNames() {
 }
 
 function char_check(word, guy, girl) {
-    const guy_chars = guy.textContent.toLowerCase().split('');
-        const girl_chars = girl.textContent.toLowerCase().split('');
-        const word_chars = word.split('');
+    const guy_chars = guy.split('');
+    const girl_chars = girl.split('');
+    const word_chars = word.split('');
 
-        char_match = 0;
-        for (let i = 0; i < word_chars.length; i++) {
-            for (let j = 1; j < guy_chars.length; j++) {
-                if (word_chars[i].match(guy_chars[j]))  char_match++;
-            }
-            for (let j = 1; j < girl_chars.length; j++) {
-                if (word_chars[i].match(girl_chars[j])) char_match++;
-            }
+    char_match = 0;
+    for (let i = 0; i < word_chars.length; i++) {
+        for (let j = 1; j < guy_chars.length; j++) {
+            if (word_chars[i].match(guy_chars[j]))  char_match++;
         }
+        for (let j = 1; j < girl_chars.length; j++) {
+            if (word_chars[i].match(girl_chars[j])) char_match++;
+        }
+    }
     if (char_match === word_chars.length) return char_match;
     return 0;
 }
