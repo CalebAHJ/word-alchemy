@@ -2004,6 +2004,8 @@ Kadence`
 const guy_names = guy_text.split(',');
 const girl_names = girl_text.split(',');
 
+const prev_inputs = [];
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -2036,9 +2038,9 @@ function char_check(word, guy, girl) {
     return 0;
 }
 
-function duplicate_word(prev_inputs, input_text) {
+function duplicate_word(input_text) {
     for (let i = 0; i < prev_inputs.length; i++) {
-        if (input_text.match(prev_inputs[i])) return true;
+        if (input_text === prev_inputs[i]) return true;
     }
     return false;
 }
@@ -2049,20 +2051,18 @@ function game() {
     word_one.textContent = getNames()[0];
     word_two.textContent = getNames()[1];
 
-    const word_entries = [];
-    let score = 0;
-
     const enter = document.getElementById('enter');
     enter.addEventListener('click', (event) => {
 
-    const input = document.getElementById('input');
-    const input_text = input.value.toLowerCase();
-        
-    if (!duplicate_word(word_entries, input_text)) {
-        score = char_check(input_text, word_one.textContent.toLowerCase(), 
-                            word_two.textContent.toLowerCase());
+        const input = document.getElementById('input');
+        const input_text = input.value.toLowerCase();
+    
+        let score = 0;    
+        if (!duplicate_word(input_text)) {
+            score = char_check(input_text, word_one.textContent.toLowerCase(), 
+                                word_two.textContent.toLowerCase());
                             
-        word_entries.push(input_text);
+            prev_inputs.push(input_text);
     }
 
             
